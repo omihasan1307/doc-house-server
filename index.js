@@ -210,13 +210,9 @@ async function run() {
     });
 
     //    DOCTOR
-    app.get("/doctorList", jwtVerify, async (req, res) => {
-      if (req.decoded.uid === req.query.uid) {
-        const result = await doctorListCollection.find().toArray();
-        res.send(result);
-      } else {
-        res.status(403).send({ message: "Forbidden" });
-      }
+    app.get("/doctorList", async (req, res) => {
+      const result = await doctorListCollection.find().toArray();
+      res.send(result);
     });
 
     app.get("/doctorDetails/:id", async (req, res) => {
